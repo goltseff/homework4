@@ -1,0 +1,28 @@
+<link href="/assets/login_style.css" rel="stylesheet">
+<div class="wrapper">
+  <div class="animation">
+      <div class="animation__eye animation__eye--one-one"></div>
+      <div class="animation__eye animation__eye--one-two"></div>
+      <div class="animation__eye animation__eye--two-one"></div>
+      <div class="animation__eye animation__eye--two-two"></div>
+      <video class="animation__video" width="384" height="374" loop muted autoplay>
+          <source src="/assets/watchers.mp4" type="video/mp4">
+      </video>
+  </div>
+  <div>
+  <form action="" class="form">
+      <fieldset class="form__fieldset"  [ngStyle]="{'visibility': isAuthorized ? 'hidden' : 'visible' }">
+          <label class="form__field form__field--login">
+              <span class="form__label">Email</span>
+              <input class="form__input form__input--login" type="text" #login>
+          </label>
+          <label class="form__field form__field--password">
+              <span class="form__label">Password</span>
+              <input class="form__input form__input--password" type="password">
+          </label>
+      </fieldset>
+      <a class="form__button" [ngStyle]="{'visibility': isAuthorized ? 'hidden' : 'visible' }" (click)="logIn(login.value)">Log in</a>
+      <a class="form__button" [ngStyle]="{'visibility': !isAuthorized ? 'hidden' : 'visible' }" (click)="logOut()">Log out</a>
+  </form>
+  <p class="about">* использован фрагмент <a href="http://vasya-lozhkin.ru/pictures/rodina-slyshit/" class="about__link">картины Васи Ложкина</a></p>
+</div>
