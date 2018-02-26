@@ -11,13 +11,15 @@ import { UserService } from './services/user.service';
 import { LoginContainerComponent } from './components/login-container/login-container.component';
 import { TaskViewContainerComponent } from './components/task-view-container/task-view-container.component';
 import { TaskListContainerComponent } from './components/task-list-container/task-list-container.component';
+import { TaskItemComponent } from './components/task-item/task-item.component';
 
 
 const appRoutes: Routes = [
   { path: 'login', component: LoginContainerComponent },
-  { path: 'list', component: TaskListContainerComponent },
+  { path: 'list', component: TaskListContainerComponent},
+  { path: 'list/:id', component: TaskViewContainerComponent},
   { path: '', redirectTo: 'list', pathMatch: 'full' },
-  { path: '**', component: AppComponent }
+  { path: '**', redirectTo: 'list', pathMatch: 'full' }
 ];
 
 
@@ -26,7 +28,8 @@ const appRoutes: Routes = [
     AppComponent,
     LoginContainerComponent,
     TaskViewContainerComponent,
-    TaskListContainerComponent
+    TaskListContainerComponent,
+    TaskItemComponent
   ],
   imports: [
     BrowserModule, HttpClientModule, RouterModule.forRoot(appRoutes)

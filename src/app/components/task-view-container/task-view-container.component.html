@@ -1,3 +1,44 @@
-<p>
-  task-view-container works!
-</p>
+<table border=1 width=400 style="border-collapse: collapse;">
+  <tr>
+    <td colspan=2 align=center>{{ ((todoitem.id === 0)?'Создать новую задачу':'Редактировать задачу: '+todoitem.id )}}</td>
+  </tr>
+  <tr>
+      <td>ID</td>
+      <td>{{ ((todoitem.id===0)?'':todoitem.id) }}</td>
+  </tr>
+  <tr>
+      <td>Заголовок</td>
+      <td><input type=text name=edit_name #edit_name  value="{{ todoitem.name }}"></td>
+  </tr>
+  <tr>
+    <td>Содержание</td>
+    <td><textarea name="edit_dscr" #edit_dscr style="width:95%;height:200px;">{{todoitem.desc}}</textarea></td>
+ </tr>
+ <tr>
+  <td>Тэги</td>
+  <td>
+    <ng-container *ngFor="let tag of edited_tags">
+      <label><input type=checkbox id="ch_{{tag.name}}" value=1 (change) ="updateCheckboxes($event)" [checked]="((tag.checked)?'checked':'')"  [disabled]="((todoitem.id===0)?'disabled':'')"> {{tag.name}}  </label><br>
+    </ng-container>
+  </td>
+</tr>
+<tr>
+  <td>Статус</td>
+  <td>
+    <select name=edit_status #edit_status>
+        <option *ngFor="let status of statuses_dictionary;  let i = index" value="{{i}}" [attr.selected]="((todoitem.status===i)?true:null)">{{status}}</option>        
+    </select>
+  </td>
+</tr>
+<tr>
+<td colspan=2 align=center>
+  <input type="button" value="сохранить" (click)="saveTodo(edit_name,edit_dscr,edit_status)" >
+</td>
+</tr>   
+</table>
+<h3>Другие задачки:</h3>
+<app-task-item 
+*ngFor="let todoitem of items" 
+[todoitem] = "todoitem" 
+(delTodo)="delTodo($event)" 
+(editTodo)="editTodo($event)"></app-task-item>

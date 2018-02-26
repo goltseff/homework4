@@ -30,7 +30,13 @@ export class ToDoService {
         });
         this.items = tmp_items;
     }
-
+    isExists(p_id: number) {
+        let result = false;
+        this.items.forEach(function (value, index) {
+            if (value.id === p_id) { result = true; }
+        });
+        return result;
+    }
     setItem(item: ITodoItemData) {
         item.type = 'todoiteminlocalstorage';
         localStorage.setItem(item.id.toString(), JSON.stringify(item));

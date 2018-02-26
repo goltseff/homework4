@@ -1,1 +1,7 @@
-тут будет список тасков
+<input type=button (click)="addTodo()" value="новая задачка">
+<h3>Список задачек:</h3>
+<app-task-item 
+*ngFor="let todoitem of items" 
+[todoitem] = "todoitem" 
+(delTodo)="delTodo($event)" 
+(editTodo)="editTodo($event)"></app-task-item>
