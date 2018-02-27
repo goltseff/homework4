@@ -18,7 +18,7 @@
   <td>Тэги</td>
   <td>
     <ng-container *ngFor="let tag of edited_tags">
-      <label><input type=checkbox id="ch_{{tag.name}}" value=1 (change) ="updateCheckboxes($event)" [checked]="((tag.checked)?'checked':'')"  [disabled]="((todoitem.id===0)?'disabled':'')"> {{tag.name}}  </label><br>
+      <label><input type=checkbox id="ch_{{tag.name}}" value=1 (change) ="updateCheckboxes($event)" [checked]="((tag.checked)?'checked':'')" > {{tag.name}}  </label><br>
     </ng-container>
   </td>
 </tr>
@@ -40,5 +40,6 @@
 <app-task-item 
 *ngFor="let todoitem of items" 
 [todoitem] = "todoitem" 
+[hidedelete] = "1"
 (delTodo)="delTodo($event)" 
 (editTodo)="editTodo($event)"></app-task-item>

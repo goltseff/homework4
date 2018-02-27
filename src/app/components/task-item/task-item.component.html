@@ -7,6 +7,7 @@
           {{tag}}
   </ng-container>
   <br>Status: {{ statuses_dictionary[todoitem.status]}}
-  <br>[<a href="javascript:void(0)" (click)="delTodoClk(todoitem.id)">удалить</a>]  
+  <br>  <span *ngIf="(hidedelete == 0)">[<a href="javascript:void(0)" (click)="delTodoClk(todoitem.id)">удалить</a>]  </span>
   [<a [routerLink]="['/list',todoitem.id]">ред-ть</a>]
+  
   </div>

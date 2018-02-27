@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute, NavigationStart } from '@angular/router';
+import { Router, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { ToDoService, ITodoItemData } from '../../services/todo.service';
 
 interface ITagsChecked {
@@ -19,7 +19,7 @@ export class TaskViewContainerComponent implements OnInit {
   private tags: string[] = [];
   public statuses_dictionary = [];
   public items: ITodoItemData[] = [];
-
+  public haschanges = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -31,7 +31,7 @@ export class TaskViewContainerComponent implements OnInit {
     this.tags = this.todoService.tags_dictionary;
     this.items = this.todoService.items;
     router.events.subscribe((event) => {
-      if (event instanceof NavigationStart && event.url.indexOf('/list/') !== -1) {
+      if (event instanceof NavigationEnd) {
         this.initComponent();
       }
     });
@@ -97,6 +97,7 @@ export class TaskViewContainerComponent implements OnInit {
   }
 
   saveTodo(p_edit_name, p_edit_dscr, p_edit_status) {
+    this.haschanges = true;
     let error = '';
     const checked_tags = [];
     if (p_edit_name.value === '') { error = 'Не задан заголовок'; }
